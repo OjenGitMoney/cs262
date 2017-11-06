@@ -1,11 +1,14 @@
 import random
 import csv
+import time
 
 def knapsack(items, maxCapaciy):
     knapsackFinal = []
     bestWeight= 0
     bestValue = 0
     superSet = makeSuperSet(items)
+
+    startTime = time.time()
     for itemSet in superSet:
         setWeight = sum([weight[0] for weight in itemSet])
         setValue = sum([value[1] for value in itemSet])
@@ -13,7 +16,8 @@ def knapsack(items, maxCapaciy):
             bestValue = setValue
             bestWeight = setWeight
             knapsackFinal = itemSet
-    return knapsackFinal
+    elapsedTime = time.time()-startTime
+    return knapsackFinal, elapsedTime
 
 def makeSuperSet(listOfItems):
     superSet = [[]]
@@ -29,7 +33,7 @@ def makeDataFile(n):
         file.writelines(str(random.randint(1,50)) + ',' + str(random.randint(1,100)) + '\n')
 
 if __name__ == '__main__':
-    makeDataFile(20)
+    #makeDataFile(20)
     items = []
     with open('assets/inputData2.csv') as csvFile:
         reader = csv.DictReader(csvFile)
@@ -39,5 +43,7 @@ if __name__ == '__main__':
             #print len(items)
     t = makeSuperSet(items)
     #print len(t)
-    knapSackChosen = knapsack(items, maxCapaciy=60)
+    knapSackChosen, runtime = knapsack(items, maxCapaciy=60)
     print knapSackChosen
+    print '\n'
+    print runtime
