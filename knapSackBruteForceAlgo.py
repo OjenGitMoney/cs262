@@ -41,7 +41,7 @@ def makeDataFile(n):
         file.writelines(str(random.randint(1,50)) + ',' + str(random.randint(1,100)) + '\n')
 
 if __name__ == '__main__':
-    makeDataFile(21)
+    #makeDataFile(21)
     items = []
     with open('assets/inputData2.csv') as csvFile:
         reader = csv.DictReader(csvFile)
