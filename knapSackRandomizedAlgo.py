@@ -5,20 +5,29 @@ import time
 
 def knapsackRandomized(items, maxCapacity):
     print len(items)
-    knapSackFinal = [0] * len(items)
+    knapSackFinal = []
+    knapSackBinary = [0] * len(items)
     bestWeight = 0
     bestValue = 0
-
-    runtime = time.time()
-    # for item in items:
-    #
-    #     knapSackFinal.append(item)
-
-    print len(knapSackFinal)
-    return knapSackFinal, runtime
-
-
-
+    i = 0
+    startTime = time.time()
+    print items
+    while bestWeight <= maxCapacity:
+        i+=1
+        print i
+        item = random.choice(items)
+        if item not in knapSackFinal:
+            bestWeight = bestWeight + item[0]
+            bestValue = bestValue + item[1]
+            if bestWeight <= maxCapacity:
+                knapSackBinary[items.index(item)]= 1
+                knapSackFinal.append(item)
+        else:
+            print "Already in it..."
+            
+    elapsedTime = time.time() - startTime
+    print knapSackBinary
+    return knapSackFinal, elapsedTime
 
 
 
