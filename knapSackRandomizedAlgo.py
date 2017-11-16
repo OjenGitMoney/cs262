@@ -18,8 +18,8 @@ def knapsackRandomized(items, maxCapacity):
         item = random.choice(items)
         if item not in knapSackFinal:
             bestWeight = bestWeight + item[0]
-            bestValue = bestValue + item[1]
             if bestWeight <= maxCapacity:
+                bestValue = bestValue + item[1]
                 knapSackBinary[items.index(item)]= 1
                 knapSackFinal.append(item)
         else:
@@ -27,7 +27,8 @@ def knapsackRandomized(items, maxCapacity):
             
     elapsedTime = time.time() - startTime
     print knapSackBinary
-    return knapSackFinal, elapsedTime
+    print bestValue
+    return knapSackFinal, elapsedTime, bestValue
 
 
 
@@ -40,15 +41,20 @@ if __name__ == '__main__':
         reader = csv.DictReader(csvFile)
         for line in reader:
             items.append((int(line['weight']), int(line['cost'])))
-
-    knapSackChosen, runtime = knapsackRandomized(items, maxCapacity=60)
-
-    print "chosen : \n"
-    print knapSackChosen
-    print '\n'
-    print runtime
-
-
+    for i in range(100):
+        knapSackChosen, runtime, bestValue = knapsackRandomized(items, maxCapacity=60)
+        # print "chosen : \n"
+        # print knapSackChosen
+        # print '\n'
+        # print runtime
+        f = open('RandResults.csv', 'a')
+        f.write(knapSackChosen.__str__())
+        f.write(',')
+        f.write(runtime.__str__())
+        f.write(',')
+        f.write(bestValue.__str__())
+        f.write('\n')
+    f.close()
 
 
 

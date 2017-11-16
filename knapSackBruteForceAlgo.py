@@ -24,6 +24,7 @@ def knapsack(items, maxCapaciy):
     for onePicked in knapsackFinal:
         knapsackBinary[last_list.index(onePicked)] = 1
     print last_list
+    print bestValue
     print knapsackBinary
     return knapsackFinal, elapsedTime
 
@@ -38,10 +39,10 @@ def makeDataFile(n):
     file = open('assets/inputData2.csv', 'w')
     file.writelines('weight' + ',' + 'cost' + '\n')
     for i in range(n):
-        file.writelines(str(random.randint(1,50)) + ',' + str(random.randint(1,100)) + '\n')
+        file.writelines(str(random.randint(1,50)) + ',' + str(random.randint(1,50)) + '\n')
 
 if __name__ == '__main__':
-    #makeDataFile(21)
+    #makeDataFile(20)
     items = []
     with open('assets/inputData2.csv') as csvFile:
         reader = csv.DictReader(csvFile)
